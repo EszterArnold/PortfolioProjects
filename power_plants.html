@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Eszter Arnold's portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt style2">
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<ul class="links">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="EszterArnold_CV.html" class="button primary fit">My CV</a></li>
+						</ul>
+				</nav>
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="images/power_plant.png" alt="" />
+							</span>
+							<header class="major">
+								<h1>Power Plants - Tableau Project</h1>
+							</header>
+							<div class="content">
+								<p>goal: creating visualizations from the data for better understanding of the topic<br>
+								tools used:<br>
+								Tableau (Public) for visualization<br>
+								SQL (PostgreSQL with pgAdmin4) for some minor data manipulation
+								</p>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h2>Project details</h2>
+									</header>
+									<p>
+										<a href="https://public.tableau.com/app/profile/eszterarnold/viz/PowerPlants_16673963134000/Leadingpowers?publish=yes">View Tableau visualizations of the project</a></p>
+									<p><a href="https://www.kaggle.com/datasets/ramjasmaurya/global-powerplants">Kaggle data set on global power plants</a><br>
+										<a href="https://data.worldbank.org/indicator/SP.POP.TOTL>">Population data of 2021 from World Bank</a><br>
+										<a href></a>
+									</p>
+									<div class="inner">
+										<p>Here are the final dashboard pages:
+											<i>note: As you know Tableau sheets and dashboards are dynamic and interactive, so I highly recomennd visiting the link to see the original work,
+												but if for some reason you choose not too, I download static images of them for this website.
+											</i>
+										</p>
+										<figure><image src="images/T_dashboard1.png" width=80%></image></figure><br>
+										<figure><image src="images/T_dashboard2.png" width=80%></image>
+										
+										
+									</div>
+									<h4>Preparation</h4>
+									<p>Originally I planned to do some work in SQL, but I realized that the data didn't really require cleaning, it came in a good shape. I wanted to download
+										the result of some queries that I prepared in SQL for visualizing the data, but I also came to a conclusion that it is more flexible and I can show more (e.g. filters)
+										if I just add the file directly to Tableau. The only thing I prepared in SQL is adding a SERIAL id column to the table.
+										The dataset is a csv file with 15 fields and about 35 000 records. It holds geographical and identification data of power plants all over the world, and it also
+										contains data about the year they started working, their capacity and fuel. 
+										I also added the World Bank population data of 2021 as another table. I joined the two tables ON country_codes.<br><br>
+										
+									</p>
+									
+										<p>
+											<h3>Leading powers in producing electricty</h3>
+										<ul>
+											<li>First let's focus on who have the most of power plants?<br>
+												Here is the viz of our query result:
+												<div class="inner">
+													<figure><image src="images/top10_number.png" width=80%></image></figure>
+												</div>
+											<li>But having the most doesn't necessarily means producing the most energity, so probably it more useful the focus on the actually generated power.
+												Unfortunately the data is far from complete. We have a column for the generated GWhs in 2021 and we have an estimation column for the same.
+												But if we query how many records show NULL is both columns, then we see that even in the leading countries of our search we are missing thousands of
+												data points. So, we should use our next best option, the capacity.
+												<br><i>note: Capacity also won't give us a perfect picture, because it does NOT guarantee that all the power plants are working full time, but it is our
+													closest estimate.</i>
+												<br>Let'see the the top 10 countries by total capacity.
+												
+												<figure><image src="images/top10_capacity.png" width=80%></image></figure>
+												
+												I chose to make a bar chart for these first two visualizations, using the same color codes for the same countries, so it is easier for the eye to compare
+												their positions.<br>
+												We see that the list is somewhat similar, but some players and orders have changed. For example China has less than half as many power plants as the US,
+												but its capacity surpasses the other's. So i was a valid call to use capacity instead of just the mere count of the plants.<br> 
+											<li>When we talk about a country's production, we cannot ignore the size of the country, what to some degree is reflected in how big the population is. 
+												By JOINing the power plants and the population tables ON the country code, we can look at the capacity calculated for every 100 000 inhabitants.
+												
+													<figure><image src="images/per_capita.png" width=100%></image></figure>
+												Here you can see that the picture is pretty different now. The earlier top countries here are marked by blue, and they are not necessarily all leading anymore.
+										
+											</li>
+											<li>In the previous vizzes we can compare countries' total production and their production by the sam kind of fuel, but it would be nice to see a comparison of the magnitude
+												of different players' output divided by the fuel. This gave me the perfect opportunity to use the stacked bubbles.
+												
+													<figure><image src="images/biggest_producers.png" width=50%></image></figure>
+											</li>
+											<li>If we want to dive into more the details about each country, then on this interactive map you can just choose a country and with the help of the primary fuel filter,
+												get the data of the specific production.
+												
+													<figure><image src="images/country_details.png" width=60%></image></figure>
+											</li>
+											<li>Using the geographical data (latitude and longitude), I compared the production of the Northern and Southern hemisphere as well.
+												I added a column in SQL to the table, where I labeled the records with 'Northern' and 'Southern' labels and used that data for the comparison.
+												
+													<figure><image src="images/hemispheres.png" width=60%></image></figure>
+											</li>
+											<li>One more interesting visualization can be done from the data. We can show a timeline and display how many power plants the leading countries have at that point
+												in time using a Running Total.
+												
+													<figure><image src="images/cumulative_numbers.png" width=60%></image></figure>
+											</li>
+										</ul>
+										</p>
+											
+											<li><i>note: All the sheets can be filtered for primary fuel.</i><br>
+											
+									
+							
+							</section>
+					
+
+				<!-- Contact -->
+					<section id="contact">
+						<div class="inner">
+							<section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-envelope"></span>
+										<h3>Email</h3>
+										<a href="#">eszter.arnold@gmail.com</a>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-home"></span>
+										<h3>Address</h3>
+										<span>Valencia,Spain</span>
+									</div>
+								</section>
+							</section>
+						</div>
+					</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<div class="inner">
+						<ul class="icons">
+							<script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+								<li><a href="https://github.com/eszmo" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="https://www.linkedin.com/in/eszter-arnold/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://public.tableau.com/app/profile/eszterarnold" class="icon brands alt fab-tableau"><iconify-icon icon="ion:logo-tableau"></iconify-icon>Tableau</span></a> </li>
+							</ul>
+						<ul class="copyright">
+							<li>&copy; eszmo</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

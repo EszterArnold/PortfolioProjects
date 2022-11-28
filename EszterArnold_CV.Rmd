@@ -1,0 +1,60 @@
+---
+title: CV
+name: Eszter
+surname: Arnold
+position: "Data Analyst"
+address: "Valencia, Spain"
+phone: +34 633 515 591
+www: eszterarnold.github.io
+email: "eszter.arnold@gmail.com"
+date: "`r format(Sys.time(), '%B %Y')`"
+output: 
+  vitae::markdowncv:
+    theme: kjhealy
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+```
+
+## Some stuff about me
+
+ * I transitioned to data analytics from a background in Social and Political Science.
+ * I was born in Hungary, but living in Spain.
+
+## Skills
+
+* **Excel** - pivot table, dashboard, conditional formatting, XLOOKUP
+* **SQL** - PostgreSQL, BigQuery
+* **Tableau** - sorting, filtering, joins, dashboard
+* **R** - ggplot2, dplyr, tidyr, plotly
+
+## Education
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "MITx", "2019", "online", "Micromasters in Data, Economics and Development Policy",
+  "King Sigismund Business", "2013", "Hungary", "BA in International Relations"
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
+```
+
+## Experience
+
+```{r}
+tribble(
+  ~Year, ~Type, ~Desc,
+  "2016-present","English teacher and translator", "Built my own teaching material library on Google Drive to make the workflow more effective. Implemented technology-driven education.",
+  "2009-2014","Financial Assistant/ KRIO Cell Bank", "Created **Sales Team reports and visualizations in Excel**. **Structured automated** monthly and quarterly **financial reports** of the various departments in Excel. **Represented** the financial department **in the developing team** of a bespoke CRM software."
+) %>% 
+  brief_entries(
+    Type,
+    Year,
+    Desc
+  )
+```
+
+
